@@ -21,6 +21,9 @@
 		27C0171D182A2EAC0041E2FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C016FF182A2EAC0041E2FE /* UIKit.framework */; };
 		27C01725182A2EAC0041E2FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27C01723182A2EAC0041E2FE /* InfoPlist.strings */; };
 		27C01727182A2EAC0041E2FE /* EmotionLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01726182A2EAC0041E2FE /* EmotionLabelTests.m */; };
+		27C01732182A319D0041E2FE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C01731182A319D0041E2FE /* CoreText.framework */; };
+		27C01735182A31B30041E2FE /* EmotionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01734182A31B30041E2FE /* EmotionLabel.m */; };
+		27C0173C182A4EA60041E2FE /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C0173B182A4EA60041E2FE /* test.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,10 @@
 		27C01722182A2EAC0041E2FE /* EmotionLabelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmotionLabelTests-Info.plist"; sourceTree = "<group>"; };
 		27C01724182A2EAC0041E2FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27C01726182A2EAC0041E2FE /* EmotionLabelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmotionLabelTests.m; sourceTree = "<group>"; };
+		27C01731182A319D0041E2FE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		27C01733182A31B30041E2FE /* EmotionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionLabel.h; sourceTree = "<group>"; };
+		27C01734182A31B30041E2FE /* EmotionLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionLabel.m; sourceTree = "<group>"; };
+		27C0173B182A4EA60041E2FE /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C01732182A319D0041E2FE /* CoreText.framework in Frameworks */,
 				27C016FE182A2EAC0041E2FE /* CoreGraphics.framework in Frameworks */,
 				27C01700182A2EAC0041E2FE /* UIKit.framework in Frameworks */,
 				27C016FC182A2EAC0041E2FE /* Foundation.framework in Frameworks */,
@@ -101,6 +109,7 @@
 		27C016FA182A2EAC0041E2FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27C01731182A319D0041E2FE /* CoreText.framework */,
 				27C016FB182A2EAC0041E2FE /* Foundation.framework */,
 				27C016FD182A2EAC0041E2FE /* CoreGraphics.framework */,
 				27C016FF182A2EAC0041E2FE /* UIKit.framework */,
@@ -112,11 +121,13 @@
 		27C01701182A2EAC0041E2FE /* EmotionLabel */ = {
 			isa = PBXGroup;
 			children = (
+				27C01730182A31920041E2FE /* EmotionLabel */,
 				27C0170A182A2EAC0041E2FE /* AppDelegate.h */,
 				27C0170B182A2EAC0041E2FE /* AppDelegate.m */,
 				27C0170D182A2EAC0041E2FE /* Main.storyboard */,
 				27C01710182A2EAC0041E2FE /* ViewController.h */,
 				27C01711182A2EAC0041E2FE /* ViewController.m */,
+				27C0173B182A4EA60041E2FE /* test.png */,
 				27C01713182A2EAC0041E2FE /* Images.xcassets */,
 				27C01702182A2EAC0041E2FE /* Supporting Files */,
 			);
@@ -150,6 +161,15 @@
 				27C01723182A2EAC0041E2FE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27C01730182A31920041E2FE /* EmotionLabel */ = {
+			isa = PBXGroup;
+			children = (
+				27C01733182A31B30041E2FE /* EmotionLabel.h */,
+				27C01734182A31B30041E2FE /* EmotionLabel.m */,
+			);
+			path = EmotionLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +251,7 @@
 				27C01714182A2EAC0041E2FE /* Images.xcassets in Resources */,
 				27C01706182A2EAC0041E2FE /* InfoPlist.strings in Resources */,
 				27C0170F182A2EAC0041E2FE /* Main.storyboard in Resources */,
+				27C0173C182A4EA60041E2FE /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C01735182A31B30041E2FE /* EmotionLabel.m in Sources */,
 				27C01712182A2EAC0041E2FE /* ViewController.m in Sources */,
 				27C0170C182A2EAC0041E2FE /* AppDelegate.m in Sources */,
 				27C01708182A2EAC0041E2FE /* main.m in Sources */,
@@ -460,6 +482,7 @@
 				27C0172C182A2EAC0041E2FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		27C0172D182A2EAC0041E2FE /* Build configuration list for PBXNativeTarget "EmotionLabelTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +491,7 @@
 				27C0172F182A2EAC0041E2FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
