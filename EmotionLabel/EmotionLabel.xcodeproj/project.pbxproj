@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27C016FC182A2EAC0041E2FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C016FB182A2EAC0041E2FE /* Foundation.framework */; };
+		27C016FE182A2EAC0041E2FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C016FD182A2EAC0041E2FE /* CoreGraphics.framework */; };
+		27C01700182A2EAC0041E2FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C016FF182A2EAC0041E2FE /* UIKit.framework */; };
+		27C01706182A2EAC0041E2FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27C01704182A2EAC0041E2FE /* InfoPlist.strings */; };
+		27C01708182A2EAC0041E2FE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01707182A2EAC0041E2FE /* main.m */; };
+		27C0170C182A2EAC0041E2FE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C0170B182A2EAC0041E2FE /* AppDelegate.m */; };
+		27C0170F182A2EAC0041E2FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C0170D182A2EAC0041E2FE /* Main.storyboard */; };
+		27C01712182A2EAC0041E2FE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01711182A2EAC0041E2FE /* ViewController.m */; };
+		27C01714182A2EAC0041E2FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27C01713182A2EAC0041E2FE /* Images.xcassets */; };
+		27C0171B182A2EAC0041E2FE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C0171A182A2EAC0041E2FE /* XCTest.framework */; };
+		27C0171C182A2EAC0041E2FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C016FB182A2EAC0041E2FE /* Foundation.framework */; };
+		27C0171D182A2EAC0041E2FE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C016FF182A2EAC0041E2FE /* UIKit.framework */; };
+		27C01725182A2EAC0041E2FE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27C01723182A2EAC0041E2FE /* InfoPlist.strings */; };
+		27C01727182A2EAC0041E2FE /* EmotionLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01726182A2EAC0041E2FE /* EmotionLabelTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27C0171E182A2EAC0041E2FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27C016F0182A2EAC0041E2FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27C016F7182A2EAC0041E2FE;
+			remoteInfo = EmotionLabel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		27C016F8182A2EAC0041E2FE /* EmotionLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmotionLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		27C016FB182A2EAC0041E2FE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		27C016FD182A2EAC0041E2FE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		27C016FF182A2EAC0041E2FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		27C01703182A2EAC0041E2FE /* EmotionLabel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmotionLabel-Info.plist"; sourceTree = "<group>"; };
+		27C01705182A2EAC0041E2FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27C01707182A2EAC0041E2FE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		27C01709182A2EAC0041E2FE /* EmotionLabel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmotionLabel-Prefix.pch"; sourceTree = "<group>"; };
+		27C0170A182A2EAC0041E2FE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		27C0170B182A2EAC0041E2FE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		27C0170E182A2EAC0041E2FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		27C01710182A2EAC0041E2FE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		27C01711182A2EAC0041E2FE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		27C01713182A2EAC0041E2FE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		27C01719182A2EAC0041E2FE /* EmotionLabelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmotionLabelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27C0171A182A2EAC0041E2FE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		27C01722182A2EAC0041E2FE /* EmotionLabelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmotionLabelTests-Info.plist"; sourceTree = "<group>"; };
+		27C01724182A2EAC0041E2FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27C01726182A2EAC0041E2FE /* EmotionLabelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmotionLabelTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27C016F5182A2EAC0041E2FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C016FE182A2EAC0041E2FE /* CoreGraphics.framework in Frameworks */,
+				27C01700182A2EAC0041E2FE /* UIKit.framework in Frameworks */,
+				27C016FC182A2EAC0041E2FE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27C01716182A2EAC0041E2FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C0171B182A2EAC0041E2FE /* XCTest.framework in Frameworks */,
+				27C0171D182A2EAC0041E2FE /* UIKit.framework in Frameworks */,
+				27C0171C182A2EAC0041E2FE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		27C016EF182A2EAC0041E2FE = {
+			isa = PBXGroup;
+			children = (
+				27C01701182A2EAC0041E2FE /* EmotionLabel */,
+				27C01720182A2EAC0041E2FE /* EmotionLabelTests */,
+				27C016FA182A2EAC0041E2FE /* Frameworks */,
+				27C016F9182A2EAC0041E2FE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		27C016F9182A2EAC0041E2FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27C016F8182A2EAC0041E2FE /* EmotionLabel.app */,
+				27C01719182A2EAC0041E2FE /* EmotionLabelTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27C016FA182A2EAC0041E2FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27C016FB182A2EAC0041E2FE /* Foundation.framework */,
+				27C016FD182A2EAC0041E2FE /* CoreGraphics.framework */,
+				27C016FF182A2EAC0041E2FE /* UIKit.framework */,
+				27C0171A182A2EAC0041E2FE /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		27C01701182A2EAC0041E2FE /* EmotionLabel */ = {
+			isa = PBXGroup;
+			children = (
+				27C0170A182A2EAC0041E2FE /* AppDelegate.h */,
+				27C0170B182A2EAC0041E2FE /* AppDelegate.m */,
+				27C0170D182A2EAC0041E2FE /* Main.storyboard */,
+				27C01710182A2EAC0041E2FE /* ViewController.h */,
+				27C01711182A2EAC0041E2FE /* ViewController.m */,
+				27C01713182A2EAC0041E2FE /* Images.xcassets */,
+				27C01702182A2EAC0041E2FE /* Supporting Files */,
+			);
+			path = EmotionLabel;
+			sourceTree = "<group>";
+		};
+		27C01702182A2EAC0041E2FE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				27C01703182A2EAC0041E2FE /* EmotionLabel-Info.plist */,
+				27C01704182A2EAC0041E2FE /* InfoPlist.strings */,
+				27C01707182A2EAC0041E2FE /* main.m */,
+				27C01709182A2EAC0041E2FE /* EmotionLabel-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27C01720182A2EAC0041E2FE /* EmotionLabelTests */ = {
+			isa = PBXGroup;
+			children = (
+				27C01726182A2EAC0041E2FE /* EmotionLabelTests.m */,
+				27C01721182A2EAC0041E2FE /* Supporting Files */,
+			);
+			path = EmotionLabelTests;
+			sourceTree = "<group>";
+		};
+		27C01721182A2EAC0041E2FE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				27C01722182A2EAC0041E2FE /* EmotionLabelTests-Info.plist */,
+				27C01723182A2EAC0041E2FE /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		27C016F7182A2EAC0041E2FE /* EmotionLabel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27C0172A182A2EAC0041E2FE /* Build configuration list for PBXNativeTarget "EmotionLabel" */;
+			buildPhases = (
+				27C016F4182A2EAC0041E2FE /* Sources */,
+				27C016F5182A2EAC0041E2FE /* Frameworks */,
+				27C016F6182A2EAC0041E2FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EmotionLabel;
+			productName = EmotionLabel;
+			productReference = 27C016F8182A2EAC0041E2FE /* EmotionLabel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		27C01718182A2EAC0041E2FE /* EmotionLabelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27C0172D182A2EAC0041E2FE /* Build configuration list for PBXNativeTarget "EmotionLabelTests" */;
+			buildPhases = (
+				27C01715182A2EAC0041E2FE /* Sources */,
+				27C01716182A2EAC0041E2FE /* Frameworks */,
+				27C01717182A2EAC0041E2FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27C0171F182A2EAC0041E2FE /* PBXTargetDependency */,
+			);
+			name = EmotionLabelTests;
+			productName = EmotionLabelTests;
+			productReference = 27C01719182A2EAC0041E2FE /* EmotionLabelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		27C016F0182A2EAC0041E2FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Croath;
+				TargetAttributes = {
+					27C01718182A2EAC0041E2FE = {
+						TestTargetID = 27C016F7182A2EAC0041E2FE;
+					};
+				};
+			};
+			buildConfigurationList = 27C016F3182A2EAC0041E2FE /* Build configuration list for PBXProject "EmotionLabel" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 27C016EF182A2EAC0041E2FE;
+			productRefGroup = 27C016F9182A2EAC0041E2FE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				27C016F7182A2EAC0041E2FE /* EmotionLabel */,
+				27C01718182A2EAC0041E2FE /* EmotionLabelTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		27C016F6182A2EAC0041E2FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C01714182A2EAC0041E2FE /* Images.xcassets in Resources */,
+				27C01706182A2EAC0041E2FE /* InfoPlist.strings in Resources */,
+				27C0170F182A2EAC0041E2FE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27C01717182A2EAC0041E2FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C01725182A2EAC0041E2FE /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27C016F4182A2EAC0041E2FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C01712182A2EAC0041E2FE /* ViewController.m in Sources */,
+				27C0170C182A2EAC0041E2FE /* AppDelegate.m in Sources */,
+				27C01708182A2EAC0041E2FE /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27C01715182A2EAC0041E2FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C01727182A2EAC0041E2FE /* EmotionLabelTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27C0171F182A2EAC0041E2FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27C016F7182A2EAC0041E2FE /* EmotionLabel */;
+			targetProxy = 27C0171E182A2EAC0041E2FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		27C01704182A2EAC0041E2FE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27C01705182A2EAC0041E2FE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		27C0170D182A2EAC0041E2FE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27C0170E182A2EAC0041E2FE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		27C01723182A2EAC0041E2FE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27C01724182A2EAC0041E2FE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		27C01728182A2EAC0041E2FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		27C01729182A2EAC0041E2FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		27C0172B182A2EAC0041E2FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmotionLabel/EmotionLabel-Prefix.pch";
+				INFOPLIST_FILE = "EmotionLabel/EmotionLabel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		27C0172C182A2EAC0041E2FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmotionLabel/EmotionLabel-Prefix.pch";
+				INFOPLIST_FILE = "EmotionLabel/EmotionLabel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		27C0172E182A2EAC0041E2FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EmotionLabel.app/EmotionLabel";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmotionLabel/EmotionLabel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "EmotionLabelTests/EmotionLabelTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		27C0172F182A2EAC0041E2FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EmotionLabel.app/EmotionLabel";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmotionLabel/EmotionLabel-Prefix.pch";
+				INFOPLIST_FILE = "EmotionLabelTests/EmotionLabelTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		27C016F3182A2EAC0041E2FE /* Build configuration list for PBXProject "EmotionLabel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27C01728182A2EAC0041E2FE /* Debug */,
+				27C01729182A2EAC0041E2FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27C0172A182A2EAC0041E2FE /* Build configuration list for PBXNativeTarget "EmotionLabel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27C0172B182A2EAC0041E2FE /* Debug */,
+				27C0172C182A2EAC0041E2FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		27C0172D182A2EAC0041E2FE /* Build configuration list for PBXNativeTarget "EmotionLabelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27C0172E182A2EAC0041E2FE /* Debug */,
+				27C0172F182A2EAC0041E2FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 27C016F0182A2EAC0041E2FE /* Project object */;
+}
