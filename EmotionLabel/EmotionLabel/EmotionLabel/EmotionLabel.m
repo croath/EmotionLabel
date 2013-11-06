@@ -37,12 +37,8 @@
 - (void)setText:(NSString *)text{
     [super setText:text];
     
-    if (_images == nil) {
-        _images = [NSMutableArray array];
-    } else {
-        [_images removeAllObjects];
-    }
-    
+    _textFrame = NULL;
+    _images = [NSMutableArray array];
     _imageInfoArr = [NSMutableArray array];
     _imageNames = [NSMutableArray array];
     
@@ -81,15 +77,14 @@
         NSString *normalString = [string substringWithRange:normalStringRange];
         lastLoc = resultRange.location + resultRange.length;
         
-        if (![v isEqual:[matchRanges lastObject]]) {
-            normalString = [normalString stringByAppendingString:@" "];
-        }
-        
-        [self basicAttributesWithString:normalString];
+        [self basicAttributesWithString:normalString withImage:![v isEqual:[matchRanges lastObject]]];
     }
 }
 
-- (void)basicAttributesWithString:(NSString*)string{
+- (void)basicAttributesWithString:(NSString*)string withImage:(BOOL)hasImage{
+    if (hasImage) {
+        string = [string stringByAppendingString:@" "];
+    }
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:string];
     CTTextAlignment alignment = (uint8_t)self.textAlignment;
     CTLineBreakMode lineBreakMode = (uint8_t)self.lineBreakMode;
@@ -118,6 +113,7 @@
     [attrString removeAttribute:(NSString*)kCTFontAttributeName range:fullRange];
     CTFontRef aFont = CTFontCreateWithName((CFStringRef)self.font.fontName, self.font.pointSize, NULL);
 	[attrString addAttribute:(NSString*)kCTFontAttributeName value:(__bridge id)aFont range:fullRange];
+    CFRelease(aFont);
 	CFRelease(aStyle);
     
     __block NSNumber* width = [NSNumber numberWithInt:self.font.lineHeight];
@@ -127,7 +123,7 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       width, @"width",
       height, @"height",
-      [NSNumber numberWithInt:[_attributeString length] + [attrString length]-1], @"location",
+      [NSNumber numberWithUnsignedInteger:[_attributeString length] + [attrString length]-1], @"location",
       nil]
      ];
     
@@ -147,8 +143,14 @@
     NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
                                             (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
                                             nil];
-    [attrString addAttributes:attrDictionaryDelegate
-                        range:NSMakeRange([string length] - 1, 1)];
+    
+    if ([string length] < 1) {
+        return;
+    }
+    if (hasImage) {
+        [attrString addAttributes:attrDictionaryDelegate
+                            range:NSMakeRange([string length] - 1, 1)];
+    }
     
     [_attributeString appendAttributedString:attrString];
 }
