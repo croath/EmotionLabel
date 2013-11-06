@@ -18,6 +18,7 @@
 	CGRect _drawingRect;
     NSMutableArray *_images;
     NSMutableArray *_imageInfoArr;
+    NSMutableArray *_imageNames;
 }
 
 @end
@@ -43,6 +44,7 @@
     }
     
     _imageInfoArr = [NSMutableArray array];
+    _imageNames = [NSMutableArray array];
     
     _attributeString = [[NSMutableAttributedString alloc] initWithString:@""];
     [self decoratedString:text];
@@ -60,7 +62,9 @@
     for (NSTextCheckingResult *result in chunks) {
         NSString *resultStr = [string substringWithRange:[result range]];
         if ([resultStr hasPrefix:@"["] && [resultStr hasSuffix:@"]"]) {
-            if ([_matchNames containsObject:[resultStr substringWithRange:NSMakeRange(1, [resultStr length]-2)]]) {
+            NSString *imageName = [resultStr substringWithRange:NSMakeRange(1, [resultStr length]-2)];
+            if ([_matchNames containsObject:imageName]) {
+                [_imageNames addObject:imageName];
                 [matchRanges addObject:[NSValue valueWithRange:result.range]];
             }
         }
@@ -117,7 +121,6 @@
      [NSDictionary dictionaryWithObjectsAndKeys:
       width, @"width",
       height, @"height",
-      @"test", @"fileName",
       [NSNumber numberWithInt:[_attributeString length] + [attrString length]-1], @"location",
       nil]
      ];
@@ -207,12 +210,17 @@ static CGFloat widthCallback( void* ref ){
     CGContextSaveGState(ctx);
     CGContextConcatCTM(ctx, CGAffineTransformScale(CGAffineTransformMakeTranslation(0, self.bounds.size.height), 1.f, -1.f));
     
+    int index = 0;
     for (NSArray* imageData in _imageInfoArr)
     {
-        UIImage *img = [UIImage imageNamed:@"test"];
-        CGRect imgBounds = CGRectFromString([imageData objectAtIndex:1]);
-//        CGContextClearRect(ctx, imgBounds);
+        if (index >= [_imageNames count]) {
+            continue;
+        }
+        UIImage *img = [UIImage imageNamed:[_imageNames objectAtIndex:index]];
+        CGRect imgBounds = CGRectFromString([imageData objectAtIndex:0]);
+        CGContextClearRect(ctx, imgBounds);
         CGContextDrawImage(ctx, imgBounds, img.CGImage);
+        index ++;
     }
     
     CGContextRestoreGState(ctx);
@@ -257,13 +265,11 @@ static CGFloat widthCallback( void* ref ){
 	            runBounds.origin.y = origins[lineIndex].y;
 	            runBounds.origin.y -= descent;
                 
-                NSString *urlStr = [nextImage objectForKey:@"fileName"];
-                
                 CGRect imgBounds = CGRectOffset(runBounds, 0, 0);
                 
                 CGRect mirrorBounds = CGRectMake(imgBounds.origin.x, self.bounds.size.height-imgBounds.origin.y-imgBounds.size.height, imgBounds.size.width, imgBounds.size.height);// y方向imgBounds的镜像
                 [_imageInfoArr addObject: //11
-                 [NSArray arrayWithObjects:urlStr, NSStringFromCGRect(imgBounds), NSStringFromCGRect(mirrorBounds), nil]];
+                 [NSArray arrayWithObjects:NSStringFromCGRect(imgBounds), NSStringFromCGRect(mirrorBounds), nil]];
                 //load the next image //12
                 imgIndex++;
                 if (imgIndex < [_images count]) {

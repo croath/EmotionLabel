@@ -23,7 +23,9 @@
 		27C01727182A2EAC0041E2FE /* EmotionLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01726182A2EAC0041E2FE /* EmotionLabelTests.m */; };
 		27C01732182A319D0041E2FE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C01731182A319D0041E2FE /* CoreText.framework */; };
 		27C01735182A31B30041E2FE /* EmotionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01734182A31B30041E2FE /* EmotionLabel.m */; };
-		27C0173C182A4EA60041E2FE /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C0173B182A4EA60041E2FE /* test.png */; };
+		27C01740182AC3880041E2FE /* a.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C0173D182AC3880041E2FE /* a.png */; };
+		27C01741182AC3880041E2FE /* asd.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C0173E182AC3880041E2FE /* asd.png */; };
+		27C01742182AC3880041E2FE /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C0173F182AC3880041E2FE /* b.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +61,9 @@
 		27C01731182A319D0041E2FE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		27C01733182A31B30041E2FE /* EmotionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionLabel.h; sourceTree = "<group>"; };
 		27C01734182A31B30041E2FE /* EmotionLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionLabel.m; sourceTree = "<group>"; };
-		27C0173B182A4EA60041E2FE /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		27C0173D182AC3880041E2FE /* a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = a.png; sourceTree = "<group>"; };
+		27C0173E182AC3880041E2FE /* asd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asd.png; sourceTree = "<group>"; };
+		27C0173F182AC3880041E2FE /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +131,9 @@
 				27C0170D182A2EAC0041E2FE /* Main.storyboard */,
 				27C01710182A2EAC0041E2FE /* ViewController.h */,
 				27C01711182A2EAC0041E2FE /* ViewController.m */,
-				27C0173B182A4EA60041E2FE /* test.png */,
+				27C0173D182AC3880041E2FE /* a.png */,
+				27C0173E182AC3880041E2FE /* asd.png */,
+				27C0173F182AC3880041E2FE /* b.png */,
 				27C01713182A2EAC0041E2FE /* Images.xcassets */,
 				27C01702182A2EAC0041E2FE /* Supporting Files */,
 			);
@@ -248,10 +254,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C01742182AC3880041E2FE /* b.png in Resources */,
 				27C01714182A2EAC0041E2FE /* Images.xcassets in Resources */,
+				27C01740182AC3880041E2FE /* a.png in Resources */,
 				27C01706182A2EAC0041E2FE /* InfoPlist.strings in Resources */,
+				27C01741182AC3880041E2FE /* asd.png in Resources */,
 				27C0170F182A2EAC0041E2FE /* Main.storyboard in Resources */,
-				27C0173C182A4EA60041E2FE /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
