@@ -195,8 +195,6 @@ static CGFloat widthCallback( void* ref ){
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSaveGState(ctx);
     
-    // flipping the context to draw core text
-    // no need to flip our typographical bounds from now on
     CGContextConcatCTM(ctx, CGAffineTransformScale(CGAffineTransformMakeTranslation(0, self.bounds.size.height), 1.0f, -1.0f));
     
     if (self.shadowColor) {
@@ -251,14 +249,6 @@ static CGFloat widthCallback( void* ref ){
     int imgIndex = 0;
     NSDictionary* nextImage = [_images objectAtIndex:imgIndex];
     int imgLocation = [[nextImage objectForKey:@"location"] intValue];
-    
-    CFRange frameRange = CTFrameGetVisibleStringRange(f);
-    while ( imgLocation < frameRange.location ) {
-        imgIndex++;
-        if (imgIndex>=[_images count]) return;
-        nextImage = [_images objectAtIndex:imgIndex];
-        imgLocation = [[nextImage objectForKey:@"location"] intValue];
-    }
     
     NSUInteger lineIndex = 0;
     for (id lineObj in lines) {

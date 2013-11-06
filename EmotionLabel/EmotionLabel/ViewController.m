@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "EmotionLabel.h"
+#include <time.h>
 
 @interface ViewController (){
     EmotionLabel *label;
@@ -53,7 +54,8 @@
 }
 
 - (void)change{
-    [label setText:[textArray objectAtIndex:7]];
+    srand((unsigned)time(0));
+    [label setText:[textArray objectAtIndex:rand()%8]];
 }
 
 - (void)didReceiveMemoryWarning
