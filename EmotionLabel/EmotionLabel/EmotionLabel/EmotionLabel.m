@@ -50,6 +50,7 @@
     [self decoratedString:text];
 }
 
+
 - (void)decoratedString:(NSString*)string{
     NSRegularExpression* regex = [[NSRegularExpression alloc]
                                   initWithPattern:PATTERN_STR
@@ -79,7 +80,6 @@
         NSRange normalStringRange = NSMakeRange(lastLoc, resultRange.location - lastLoc);
         NSString *normalString = [string substringWithRange:normalStringRange];
         lastLoc = resultRange.location + resultRange.length;
-        NSLog(@"str - %@", normalString);
         
         if (![v isEqual:[matchRanges lastObject]]) {
             normalString = [normalString stringByAppendingString:@" "];
@@ -107,15 +107,21 @@
         }
 	};
 	CTParagraphStyleRef aStyle = CTParagraphStyleCreate(paraStyles, 2);
+    
+    NSRange fullRange = NSMakeRange(0, [string length]);
 	[attrString removeAttribute:(NSString*)kCTParagraphStyleAttributeName
-                          range:NSMakeRange(0, [string length])];
+                          range:fullRange];
 	[attrString addAttribute:(NSString*)kCTParagraphStyleAttributeName
                        value:(__bridge id)aStyle
-                       range:NSMakeRange(0, [string length])];
+                       range:fullRange];
+    
+    [attrString removeAttribute:(NSString*)kCTFontAttributeName range:fullRange];
+    CTFontRef aFont = CTFontCreateWithName((CFStringRef)self.font.fontName, self.font.pointSize, NULL);
+	[attrString addAttribute:(NSString*)kCTFontAttributeName value:(__bridge id)aFont range:fullRange];
 	CFRelease(aStyle);
     
-    __block NSNumber* width = [NSNumber numberWithInt:15];
-    __block NSNumber* height = [NSNumber numberWithInt:15];
+    __block NSNumber* width = [NSNumber numberWithInt:self.font.lineHeight];
+    __block NSNumber* height = [NSNumber numberWithInt:self.font.lineHeight];
     
     [_images addObject:
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -139,7 +145,6 @@
     
     CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgAttr));
     NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
-                                            //set the delegate
                                             (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
                                             nil];
     [attrString addAttributes:attrDictionaryDelegate
@@ -165,9 +170,18 @@ static CGFloat widthCallback( void* ref ){
 -(void)setTextColor:(UIColor*)color {
 	[self setTextColor:color range:NSMakeRange(0,[self.text length])];
 }
+
 -(void)setTextColor:(UIColor*)color range:(NSRange)range {
 	[_attributeString removeAttribute:(NSString*)kCTForegroundColorAttributeName range:range];
 	[_attributeString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)color.CGColor range:range];
+}
+
+-(void)setFontName:(NSString*)fontName size:(CGFloat)size range:(NSRange)range {
+	CTFontRef aFont = CTFontCreateWithName((CFStringRef)fontName, size, NULL);
+	if (!aFont) return;
+	[_attributeString removeAttribute:(NSString*)kCTFontAttributeName range:range];
+	[_attributeString addAttribute:(NSString*)kCTFontAttributeName value:(__bridge id)aFont range:range];
+	CFRelease(aFont);
 }
 
 - (void)drawTextInRect:(CGRect)rect{
@@ -227,50 +241,46 @@ static CGFloat widthCallback( void* ref ){
 }
 
 -(void)attachImagesWithFrame:(CTFrameRef)f{
-    NSArray *lines = (NSArray *)CTFrameGetLines(f); //1
+    NSArray *lines = (NSArray *)CTFrameGetLines(f);
     
     CGPoint origins[[lines count]];
-    CTFrameGetLineOrigins(f, CFRangeMake(0, 0), origins); //2
+    CTFrameGetLineOrigins(f, CFRangeMake(0, 0), origins);
     
-    int imgIndex = 0; //3
+    int imgIndex = 0;
     NSDictionary* nextImage = [_images objectAtIndex:imgIndex];
     int imgLocation = [[nextImage objectForKey:@"location"] intValue];
     
-    //find images for the current column
-    CFRange frameRange = CTFrameGetVisibleStringRange(f); //4
+    CFRange frameRange = CTFrameGetVisibleStringRange(f);
     while ( imgLocation < frameRange.location ) {
         imgIndex++;
-        if (imgIndex>=[_images count]) return; //quit if no images for this column
+        if (imgIndex>=[_images count]) return;
         nextImage = [_images objectAtIndex:imgIndex];
         imgLocation = [[nextImage objectForKey:@"location"] intValue];
     }
     
     NSUInteger lineIndex = 0;
-    for (id lineObj in lines) { //5
+    for (id lineObj in lines) {
         CTLineRef line = (__bridge CTLineRef)lineObj;
         
-        for (id runObj in (NSArray *)CTLineGetGlyphRuns(line)) { //6
+        for (id runObj in (NSArray *)CTLineGetGlyphRuns(line)) {
             CTRunRef run = (__bridge CTRunRef)runObj;
             CFRange runRange = CTRunGetStringRange(run);
             
-            if ( runRange.location <= imgLocation && runRange.location+runRange.length > imgLocation ) { //7
+            if ( runRange.location <= imgLocation && runRange.location+runRange.length > imgLocation ) {
 	            CGRect runBounds;
-	            CGFloat ascent;//height above the baseline
-	            CGFloat descent;//height below the baseline
-	            runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL); //8
+	            CGFloat ascent;
+	            CGFloat descent;
+	            runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL);
 	            runBounds.size.height = ascent + descent;
                 
-	            CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL); //9
+	            CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);
 	            runBounds.origin.x = origins[lineIndex].x + xOffset;
 	            runBounds.origin.y = origins[lineIndex].y;
 	            runBounds.origin.y -= descent;
                 
-                CGRect imgBounds = CGRectOffset(runBounds, 0, 0);
+                [_imageInfoArr addObject:
+                 [NSArray arrayWithObjects:NSStringFromCGRect(runBounds), nil]];
                 
-                CGRect mirrorBounds = CGRectMake(imgBounds.origin.x, self.bounds.size.height-imgBounds.origin.y-imgBounds.size.height, imgBounds.size.width, imgBounds.size.height);// y方向imgBounds的镜像
-                [_imageInfoArr addObject: //11
-                 [NSArray arrayWithObjects:NSStringFromCGRect(imgBounds), NSStringFromCGRect(mirrorBounds), nil]];
-                //load the next image //12
                 imgIndex++;
                 if (imgIndex < [_images count]) {
                     nextImage = [_images objectAtIndex: imgIndex];

@@ -20,6 +20,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     EmotionLabel *label = [[EmotionLabel alloc] init];
+    [label setFont:[UIFont systemFontOfSize:20.f]];
     [label setMatchNames:@[@"a", @"b", @"asd"]];
     [label setFrame:CGRectMake(50, 50, 200, 500)];
     [label setLineBreakMode:NSLineBreakByCharWrapping];
