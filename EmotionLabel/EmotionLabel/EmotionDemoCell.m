@@ -54,10 +54,10 @@
                                                       ofType:@"plist"]];
     return [EmotionLabel fitHeightWithString:string
                                         font:[UIFont systemFontOfSize:20.f]
-                                       width:300.f
+                                       size:CGSizeMake(300.f, MAXFLOAT)
                                   matchArray:array
                                textAlignment:0
-                               lineBreakMode:1] + 20;
+                               lineBreakMode:1].height + 20;
 }
 
 @end

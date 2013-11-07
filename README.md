@@ -61,13 +61,13 @@ like this :
 
 and put the `img` value images into your project.
 
-##Auto Fit Height
+##Auto Fit Size
 
 here here
 
-    + (CGFloat)fitHeightWithString:(NSString*)string
-                              font:(UIFont*)font
-                             width:(CGFloat)width
-                        matchArray:(NSArray*)array
-                     textAlignment:(uint8_t)textAlignment
-                     lineBreakMode:(uint8_t)lineBreakMode;
+    + (CGSize)fitHeightWithString:(NSString*)string
+                             font:(UIFont*)font
+                             size:(CGSize)size
+                       matchArray:(NSArray*)array
+                    textAlignment:(uint8_t)textAlignment
+                    lineBreakMode:(uint8_t)lineBreakMode;

@@ -305,9 +305,9 @@ static CGFloat widthCallback( void* ref ){
     return (NSDictionary*)mDic;
 }
 
-+ (CGFloat)fitHeightWithString:(NSString*)string
++ (CGSize)fitHeightWithString:(NSString*)string
                           font:(UIFont*)font
-                         width:(CGFloat)width
+                         size:(CGSize)size
                     matchArray:(NSArray*)array
                  textAlignment:(uint8_t)textAlignment
                  lineBreakMode:(uint8_t)lineBreakMode{
@@ -391,10 +391,10 @@ static CGFloat widthCallback( void* ref ){
     CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
                                                                         CFRangeMake(0, str.length),
                                                                         NULL,
-                                                                        CGSizeMake(width, MAXFLOAT),
+                                                                        size,
                                                                         NULL);
     CFRelease(framesetter);
-    return suggestedSize.height;
+    return suggestedSize;
 }
 
 - (void)dealloc{
