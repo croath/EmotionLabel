@@ -16,5 +16,7 @@
 + (CGFloat)fitHeightWithString:(NSString*)string
                           font:(UIFont*)font
                          width:(CGFloat)width
-                    matchArray:(NSArray*)array;
+                    matchArray:(NSArray*)array
+                 textAlignment:(uint8_t)textAlignment
+                 lineBreakMode:(uint8_t)lineBreakMode;
 @end

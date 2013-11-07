@@ -53,13 +53,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:
-                    [[NSBundle mainBundle] pathForResource:@"MyEmoji"
-                                                    ofType:@"plist"]];
-    return [EmotionDemoCell cellHeightWithString:[textArray objectAtIndex:indexPath.row % [textArray count]]
-                                            font:[UIFont systemFontOfSize:20.f]
-                                           width:300
-                                      matchArray:arr];
+    return [EmotionDemoCell cellHeightWithString:[textArray objectAtIndex:indexPath.row % [textArray count]]];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

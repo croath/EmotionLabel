@@ -22,6 +22,9 @@
         // Initialization code
         _label = [[EmotionLabel alloc] init];
         [_label setFont:[UIFont systemFontOfSize:20.f]];
+        [_label setTextColor:[UIColor darkGrayColor]];
+        [_label setShadowColor:[UIColor lightGrayColor]];
+        [_label setShadowOffset:CGSizeMake(0, 1)];
         NSArray *arr = [[NSArray alloc] initWithContentsOfFile:
                         [[NSBundle mainBundle] pathForResource:@"MyEmoji"
                                                         ofType:@"plist"]];
@@ -45,14 +48,16 @@
     [_label setText:text];
 }
 
-+ (CGFloat)cellHeightWithString:(NSString*)string
-                           font:(UIFont*)font
-                          width:(CGFloat)width
-                     matchArray:(NSArray*)array{
++ (CGFloat)cellHeightWithString:(NSString*)string{
+    NSArray *array = [[NSArray alloc] initWithContentsOfFile:
+                      [[NSBundle mainBundle] pathForResource:@"MyEmoji"
+                                                      ofType:@"plist"]];
     return [EmotionLabel fitHeightWithString:string
-                                        font:font
-                                       width:width
-                                  matchArray:array] + 20;
+                                        font:[UIFont systemFontOfSize:20.f]
+                                       width:300.f
+                                  matchArray:array
+                               textAlignment:0
+                               lineBreakMode:1] + 20;
 }
 
 @end

@@ -119,12 +119,15 @@
 	[attrString addAttribute:(NSString*)kCTParagraphStyleAttributeName
                        value:(__bridge id)aStyle
                        range:fullRange];
+	CFRelease(aStyle);
+    
+    [attrString removeAttribute:(NSString*)kCTForegroundColorAttributeName range:fullRange];
+	[attrString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)self.textColor.CGColor range:fullRange];
     
     [attrString removeAttribute:(NSString*)kCTFontAttributeName range:fullRange];
     CTFontRef aFont = CTFontCreateWithName((CFStringRef)self.font.fontName, self.font.pointSize, NULL);
 	[attrString addAttribute:(NSString*)kCTFontAttributeName value:(__bridge id)aFont range:fullRange];
     CFRelease(aFont);
-	CFRelease(aStyle);
     
     __block NSNumber* width = [NSNumber numberWithFloat:self.font.lineHeight];
     __block NSNumber* height = [NSNumber numberWithFloat:self.font.lineHeight];
@@ -178,15 +181,6 @@ static CGFloat descentCallback( void *ref ){
 }
 static CGFloat widthCallback( void* ref ){
     return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"width"] floatValue];
-}
-
--(void)setTextColor:(UIColor*)color {
-	[self setTextColor:color range:NSMakeRange(0,[self.text length])];
-}
-
--(void)setTextColor:(UIColor*)color range:(NSRange)range {
-	[_attributeString removeAttribute:(NSString*)kCTForegroundColorAttributeName range:range];
-	[_attributeString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)color.CGColor range:range];
 }
 
 - (void)drawTextInRect:(CGRect)rect{
@@ -312,7 +306,9 @@ static CGFloat widthCallback( void* ref ){
 + (CGFloat)fitHeightWithString:(NSString*)string
                           font:(UIFont*)font
                          width:(CGFloat)width
-                    matchArray:(NSArray*)array{
+                    matchArray:(NSArray*)array
+                 textAlignment:(uint8_t)textAlignment
+                 lineBreakMode:(uint8_t)lineBreakMode{
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:string];
     
     NSDictionary *matchDict = [self matchDictWithArray:array];
@@ -358,8 +354,8 @@ static CGFloat widthCallback( void* ref ){
         }
     }
     
-    CTTextAlignment alignment = (uint8_t)0;
-    CTLineBreakMode lineBreakMode = (uint8_t)1;
+    CTTextAlignment alignment = textAlignment;
+    CTLineBreakMode breakMode = lineBreakMode;
 	CTParagraphStyleSetting paraStyles[2] =
     {
 		{
@@ -370,7 +366,7 @@ static CGFloat widthCallback( void* ref ){
         {
             .spec = kCTParagraphStyleSpecifierLineBreakMode,
             .valueSize = sizeof(CTLineBreakMode),
-            .value = (const void*)&lineBreakMode
+            .value = (const void*)&breakMode
         }
 	};
 	CTParagraphStyleRef aStyle = CTParagraphStyleCreate(paraStyles, 2);

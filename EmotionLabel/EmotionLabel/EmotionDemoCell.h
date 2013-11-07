@@ -12,9 +12,6 @@
 
 - (void)configureWithText:(NSString*)text;
 
-+ (CGFloat)cellHeightWithString:(NSString*)string
-                           font:(UIFont*)font
-                          width:(CGFloat)width
-                     matchArray:(NSArray*)array;
++ (CGFloat)cellHeightWithString:(NSString*)string;
 
 @end
