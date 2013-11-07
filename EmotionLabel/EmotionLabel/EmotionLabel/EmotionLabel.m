@@ -329,29 +329,54 @@ static CGFloat widthCallback( void* ref ){
         if ([resultStr hasPrefix:@"["] && [resultStr hasSuffix:@"]"]) {
             NSString *name = [resultStr substringWithRange:NSMakeRange(1, [resultStr length]-2)];
             if ([[matchDict allKeys] containsObject:name]) {
-                __block NSNumber* width = [NSNumber numberWithFloat:font.lineHeight/[resultStr length]];
-                __block NSNumber* height = [NSNumber numberWithFloat:font.lineHeight];
-                
-                CTRunDelegateCallbacks callbacks;
-                callbacks.version = kCTRunDelegateVersion1;
-                callbacks.getAscent = ascentCallback;
-                callbacks.getDescent = descentCallback;
-                callbacks.getWidth = widthCallback;
-                callbacks.dealloc = deallocCallback;
-                
-                NSDictionary* imgAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                         width, @"width",
-                                         height, @"height", nil];
-                
-                CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)(imgAttr));
-                NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                        (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
-                                                        nil];
-                CFRelease(delegate);
-                
-                [str addAttributes:attrDictionaryDelegate
-                             range:[result range]];
-                
+                {
+                    __block NSNumber* width = [NSNumber numberWithFloat:font.lineHeight];
+                    __block NSNumber* height = [NSNumber numberWithFloat:font.lineHeight];
+                    
+                    CTRunDelegateCallbacks callbacks;
+                    callbacks.version = kCTRunDelegateVersion1;
+                    callbacks.getAscent = ascentCallback;
+                    callbacks.getDescent = descentCallback;
+                    callbacks.getWidth = widthCallback;
+                    callbacks.dealloc = deallocCallback;
+                    
+                    NSDictionary* imgAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                             width, @"width",
+                                             height, @"height", nil];
+                    
+                    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)(imgAttr));
+                    NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                            (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
+                                                            nil];
+                    CFRelease(delegate);
+                    
+                    [str addAttributes:attrDictionaryDelegate
+                                 range:NSMakeRange([result range].location, 1)];
+                }
+                {
+                    __block NSNumber* width = [NSNumber numberWithFloat:0];
+                    __block NSNumber* height = [NSNumber numberWithFloat:font.lineHeight];
+                    
+                    CTRunDelegateCallbacks callbacks;
+                    callbacks.version = kCTRunDelegateVersion1;
+                    callbacks.getAscent = ascentCallback;
+                    callbacks.getDescent = descentCallback;
+                    callbacks.getWidth = widthCallback;
+                    callbacks.dealloc = deallocCallback;
+                    
+                    NSDictionary* imgAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                             width, @"width",
+                                             height, @"height", nil];
+                    
+                    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)(imgAttr));
+                    NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                            (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
+                                                            nil];
+                    CFRelease(delegate);
+                    
+                    [str addAttributes:attrDictionaryDelegate
+                                 range:NSMakeRange([result range].location + 1, [result range].length - 1)];
+                }
             }
         }
     }
