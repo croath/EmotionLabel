@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray *matchArray;
 
+- (CGFloat)fitHeight;
+
 @end

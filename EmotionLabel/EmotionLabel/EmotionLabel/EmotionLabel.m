@@ -20,6 +20,7 @@
     NSMutableArray *_imageInfoArr;
     NSMutableArray *_imageNames;
     NSDictionary *_matchDict;
+    CGFloat _fixedHeight;
 }
 
 @end
@@ -224,6 +225,16 @@ static CGFloat widthCallback( void* ref ){
         CGPathAddRect(path, NULL, _drawingRect);
         _textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL);
         
+        CGFloat width = self.bounds.size.width;
+        CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(
+                                                                            framesetter, /* Framesetter */
+                                                                            CFRangeMake(0, _attributeString.length), /* String range (entire string) */
+                                                                            NULL, /* Frame attributes */
+                                                                            CGSizeMake(width, MAXFLOAT), /* Constraints (CGFLOAT_MAX indicates unconstrained) */
+                                                                            NULL /* Gives the range of string that fits into the constraints, doesn't matter in your situation */
+                                                                            );
+        _fixedHeight = suggestedSize.height;
+        
         if ([_images count]) {
             [self attachImagesWithFrame:_textFrame];
         }
@@ -298,6 +309,10 @@ static CGFloat widthCallback( void* ref ){
         }
         lineIndex++;
     }
+}
+
+- (CGFloat)fitHeight{
+    return _fixedHeight;
 }
 
 - (void)dealloc{
