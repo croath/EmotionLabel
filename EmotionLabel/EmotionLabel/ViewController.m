@@ -45,7 +45,8 @@
     
     label = [[EmotionLabel alloc] init];
     [label setFont:[UIFont systemFontOfSize:20.f]];
-    [label setMatchNames:@[@"a", @"b", @"asd"]];
+    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MyEmoji" ofType:@"plist"]];
+    [label setMatchArray:arr];
     [label setFrame:CGRectMake(50, 50, 200, 500)];
     [label setLineBreakMode:NSLineBreakByCharWrapping];
     [label setNumberOfLines:0];

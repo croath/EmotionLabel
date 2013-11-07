@@ -19,6 +19,7 @@
     NSMutableArray *_images;
     NSMutableArray *_imageInfoArr;
     NSMutableArray *_imageNames;
+    NSDictionary *_matchDict;
 }
 
 @end
@@ -37,13 +38,27 @@
 - (void)setText:(NSString *)text{
     [super setText:text];
     
-    _textFrame = NULL;
+    if (_textFrame != NULL) {
+        CFRelease(_textFrame);
+        _textFrame = NULL;
+    }
     _images = [NSMutableArray array];
     _imageInfoArr = [NSMutableArray array];
     _imageNames = [NSMutableArray array];
     
     _attributeString = [[NSMutableAttributedString alloc] initWithString:@""];
     [self decoratedString:text];
+}
+
+- (void)setMatchArray:(NSArray *)matchArray{
+    _matchArray = matchArray;
+    NSMutableDictionary *mDic = [NSMutableDictionary dictionary];
+    for (NSDictionary *d in matchArray) {
+        NSString *name = [d objectForKey:@"name"];
+        NSString *img = [d objectForKey:@"img"];
+        [mDic setObject:img forKey:name];
+    }
+    _matchDict = mDic;
 }
 
 
@@ -59,9 +74,9 @@
     for (NSTextCheckingResult *result in chunks) {
         NSString *resultStr = [string substringWithRange:[result range]];
         if ([resultStr hasPrefix:@"["] && [resultStr hasSuffix:@"]"]) {
-            NSString *imageName = [resultStr substringWithRange:NSMakeRange(1, [resultStr length]-2)];
-            if ([_matchNames containsObject:imageName]) {
-                [_imageNames addObject:imageName];
+            NSString *name = [resultStr substringWithRange:NSMakeRange(1, [resultStr length]-2)];
+            if ([[_matchDict allKeys] containsObject:name]) {
+                [_imageNames addObject:name];
                 [matchRanges addObject:[NSValue valueWithRange:result.range]];
             }
         }
@@ -143,6 +158,7 @@
     NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
                                             (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
                                             nil];
+    CFRelease(delegate);
     
     if ([string length] < 1) {
         return;
@@ -230,7 +246,7 @@ static CGFloat widthCallback( void* ref ){
         if (index >= [_imageNames count]) {
             continue;
         }
-        UIImage *img = [UIImage imageNamed:[_imageNames objectAtIndex:index]];
+        UIImage *img = [UIImage imageNamed:[_matchDict objectForKey:[_imageNames objectAtIndex:index]]];
         CGRect imgBounds = CGRectFromString([imageData objectAtIndex:0]);
         CGContextClearRect(ctx, imgBounds);
         CGContextDrawImage(ctx, imgBounds, img.CGImage);
@@ -281,6 +297,13 @@ static CGFloat widthCallback( void* ref ){
             }
         }
         lineIndex++;
+    }
+}
+
+- (void)dealloc{
+    if (_textFrame != NULL) {
+        CFRelease(_textFrame);
+        _textFrame = NULL;
     }
 }
 

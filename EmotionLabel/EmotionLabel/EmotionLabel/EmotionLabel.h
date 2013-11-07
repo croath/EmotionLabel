@@ -10,6 +10,6 @@
 
 @interface EmotionLabel : UILabel
 
-@property (nonatomic, strong) NSArray *matchNames;
+@property (nonatomic, strong) NSArray *matchArray;
 
 @end
