@@ -71,3 +71,9 @@ here here
                        matchArray:(NSArray*)array
                     textAlignment:(uint8_t)textAlignment
                     lineBreakMode:(uint8_t)lineBreakMode;
+                     
+##Have Problems?
+
+ - clone me and check the demo.
+ - forget adding `CoreText.framework`?
+ - issue or pull reqeust me.
