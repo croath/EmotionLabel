@@ -170,8 +170,10 @@
 
 /* Callbacks */
 static void deallocCallback( void* ref ){
-    //    ref = [[NSDictionary alloc] init];
-    //    [(__bridge id)ref release];
+    if (ref != NULL) {
+        CFRelease(ref);
+        ref = NULL;
+    }
 }
 static CGFloat ascentCallback( void *ref ){
     return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"height"] floatValue];
@@ -391,6 +393,7 @@ static CGFloat widthCallback( void* ref ){
                                                                         NULL,
                                                                         CGSizeMake(width, MAXFLOAT),
                                                                         NULL);
+    CFRelease(framesetter);
     return suggestedSize.height;
 }
 
