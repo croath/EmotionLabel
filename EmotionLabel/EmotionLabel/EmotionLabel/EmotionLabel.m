@@ -23,6 +23,8 @@
     CGFloat _fixedHeight;
 }
 
+@property (nonatomic, strong) NSDictionary* imgAttr;
+
 @end
 
 @implementation EmotionLabel
@@ -53,13 +55,7 @@
 
 - (void)setMatchArray:(NSArray *)matchArray{
     _matchArray = matchArray;
-    NSMutableDictionary *mDic = [NSMutableDictionary dictionary];
-    for (NSDictionary *d in matchArray) {
-        NSString *name = [d objectForKey:@"name"];
-        NSString *img = [d objectForKey:@"img"];
-        [mDic setObject:img forKey:name];
-    }
-    _matchDict = mDic;
+    _matchDict = [self.class matchDictWithArray:_matchArray];
 }
 
 
@@ -150,12 +146,11 @@
     callbacks.getWidth = widthCallback;
     callbacks.dealloc = deallocCallback;
     
-    NSDictionary* imgAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+    _imgAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
                              width, @"width",
-                             height, @"height",
-                             nil];
+                             height, @"height", nil];
     
-    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgAttr));
+    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)(_imgAttr));
     NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
                                             (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
                                             nil];
@@ -174,7 +169,9 @@
 
 /* Callbacks */
 static void deallocCallback( void* ref ){
+//    ref = [[NSDictionary alloc] init];
     //    [(__bridge id)ref release];
+    ref = nil;
 }
 static CGFloat ascentCallback( void *ref ){
     return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"height"] floatValue];
@@ -193,14 +190,6 @@ static CGFloat widthCallback( void* ref ){
 -(void)setTextColor:(UIColor*)color range:(NSRange)range {
 	[_attributeString removeAttribute:(NSString*)kCTForegroundColorAttributeName range:range];
 	[_attributeString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)color.CGColor range:range];
-}
-
--(void)setFontName:(NSString*)fontName size:(CGFloat)size range:(NSRange)range {
-	CTFontRef aFont = CTFontCreateWithName((CFStringRef)fontName, size, NULL);
-	if (!aFont) return;
-	[_attributeString removeAttribute:(NSString*)kCTFontAttributeName range:range];
-	[_attributeString addAttribute:(NSString*)kCTFontAttributeName value:(__bridge id)aFont range:range];
-	CFRelease(aFont);
 }
 
 - (void)drawTextInRect:(CGRect)rect{
@@ -226,13 +215,11 @@ static CGFloat widthCallback( void* ref ){
         _textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL);
         
         CGFloat width = self.bounds.size.width;
-        CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(
-                                                                            framesetter, /* Framesetter */
-                                                                            CFRangeMake(0, _attributeString.length), /* String range (entire string) */
-                                                                            NULL, /* Frame attributes */
-                                                                            CGSizeMake(width, MAXFLOAT), /* Constraints (CGFLOAT_MAX indicates unconstrained) */
-                                                                            NULL /* Gives the range of string that fits into the constraints, doesn't matter in your situation */
-                                                                            );
+        CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
+                                                                            CFRangeMake(0, _attributeString.length),
+                                                                            NULL,
+                                                                            CGSizeMake(width, MAXFLOAT),
+                                                                            NULL);
         _fixedHeight = suggestedSize.height;
         
         if ([_images count]) {
@@ -313,6 +300,23 @@ static CGFloat widthCallback( void* ref ){
 
 - (CGFloat)fitHeight{
     return _fixedHeight;
+}
+
++ (NSDictionary*)matchDictWithArray:(NSArray*)array{
+    NSMutableDictionary *mDic = [NSMutableDictionary dictionary];
+    for (NSDictionary *d in array) {
+        NSString *name = [d objectForKey:@"name"];
+        NSString *img = [d objectForKey:@"img"];
+        [mDic setObject:img forKey:name];
+    }
+    return (NSDictionary*)mDic;
+}
+
++ (CGFloat)fitHeightWithString:(NSString*)string
+                          font:(UIFont*)font
+                         width:(CGFloat)width
+                    matchArray:(NSArray*)array{
+    return 300;
 }
 
 - (void)dealloc{

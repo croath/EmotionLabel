@@ -13,5 +13,8 @@
 @property (nonatomic, strong) NSArray *matchArray;
 
 - (CGFloat)fitHeight;
-
++ (CGFloat)fitHeightWithString:(NSString*)string
+                          font:(UIFont*)font
+                         width:(CGFloat)width
+                    matchArray:(NSArray*)array;
 @end

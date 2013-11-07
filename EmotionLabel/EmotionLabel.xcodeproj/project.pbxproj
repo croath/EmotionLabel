@@ -27,6 +27,7 @@
 		27C01741182AC3880041E2FE /* asd.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C0173E182AC3880041E2FE /* asd.png */; };
 		27C01742182AC3880041E2FE /* b.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C0173F182AC3880041E2FE /* b.png */; };
 		27C01744182B2D940041E2FE /* MyEmoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27C01743182B2D940041E2FE /* MyEmoji.plist */; };
+		27C01747182B3D420041E2FE /* EmotionDemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C01746182B3D420041E2FE /* EmotionDemoCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		27C0173E182AC3880041E2FE /* asd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asd.png; sourceTree = "<group>"; };
 		27C0173F182AC3880041E2FE /* b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b.png; sourceTree = "<group>"; };
 		27C01743182B2D940041E2FE /* MyEmoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MyEmoji.plist; sourceTree = "<group>"; };
+		27C01745182B3D420041E2FE /* EmotionDemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDemoCell.h; sourceTree = "<group>"; };
+		27C01746182B3D420041E2FE /* EmotionDemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionDemoCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,8 @@
 				27C0170D182A2EAC0041E2FE /* Main.storyboard */,
 				27C01710182A2EAC0041E2FE /* ViewController.h */,
 				27C01711182A2EAC0041E2FE /* ViewController.m */,
+				27C01745182B3D420041E2FE /* EmotionDemoCell.h */,
+				27C01746182B3D420041E2FE /* EmotionDemoCell.m */,
 				27C0173D182AC3880041E2FE /* a.png */,
 				27C0173E182AC3880041E2FE /* asd.png */,
 				27C0173F182AC3880041E2FE /* b.png */,
@@ -283,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27C01735182A31B30041E2FE /* EmotionLabel.m in Sources */,
+				27C01747182B3D420041E2FE /* EmotionDemoCell.m in Sources */,
 				27C01712182A2EAC0041E2FE /* ViewController.m in Sources */,
 				27C0170C182A2EAC0041E2FE /* AppDelegate.m in Sources */,
 				27C01708182A2EAC0041E2FE /* main.m in Sources */,

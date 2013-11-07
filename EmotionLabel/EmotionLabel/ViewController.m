@@ -8,11 +8,12 @@
 
 #import "ViewController.h"
 #import "EmotionLabel.h"
+#import "EmotionDemoCell.h"
 #include <time.h>
 
 @interface ViewController (){
-    EmotionLabel *label;
     NSArray *textArray;
+    UITableView *_tableView;
 }
 
 @end
@@ -37,26 +38,39 @@
                   @"1",
                   @"[a]😄[b]😍[a]emotions here😌[asd]what's up?"];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [btn setFrame:CGRectMake(120, 20, 70, 20)];
-    [btn setTitle:@"change" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(change) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    
-    label = [[EmotionLabel alloc] init];
-    [label setFont:[UIFont systemFontOfSize:20.f]];
-    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MyEmoji" ofType:@"plist"]];
-    [label setMatchArray:arr];
-    [label setFrame:CGRectMake(50, 50, 200, 500)];
-    [label setLineBreakMode:NSLineBreakByCharWrapping];
-    [label setNumberOfLines:0];
-    [label setText:[textArray objectAtIndex:0]];
-    [self.view addSubview:label];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    [_tableView setDataSource:self];
+    [_tableView setDelegate:self];
+    [self.view addSubview:_tableView];
 }
 
-- (void)change{
-    srand((unsigned)time(0));
-    [label setText:[textArray objectAtIndex:rand()%8]];
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 50;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:
+                    [[NSBundle mainBundle] pathForResource:@"MyEmoji"
+                                                    ofType:@"plist"]];
+    return [EmotionDemoCell cellHeightWithString:[textArray objectAtIndex:indexPath.row % [textArray count]]
+                                            font:[UIFont systemFontOfSize:20.f]
+                                           width:200
+                                      matchArray:arr];
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    EmotionDemoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseId"];
+    if (cell == nil) {
+        cell = [[EmotionDemoCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:@"reuseId"];
+    }
+    
+    [cell configureWithText:[textArray objectAtIndex:indexPath.row % [textArray count]]];
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
