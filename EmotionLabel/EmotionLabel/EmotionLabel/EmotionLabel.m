@@ -23,8 +23,6 @@
     CGFloat _fixedHeight;
 }
 
-@property (nonatomic, strong) NSDictionary* imgAttr;
-
 @end
 
 @implementation EmotionLabel
@@ -128,8 +126,8 @@
     CFRelease(aFont);
 	CFRelease(aStyle);
     
-    __block NSNumber* width = [NSNumber numberWithInt:self.font.lineHeight];
-    __block NSNumber* height = [NSNumber numberWithInt:self.font.lineHeight];
+    __block NSNumber* width = [NSNumber numberWithFloat:self.font.lineHeight];
+    __block NSNumber* height = [NSNumber numberWithFloat:self.font.lineHeight];
     
     [_images addObject:
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -146,11 +144,11 @@
     callbacks.getWidth = widthCallback;
     callbacks.dealloc = deallocCallback;
     
-    _imgAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
+    NSDictionary* imgAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
                              width, @"width",
                              height, @"height", nil];
     
-    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)(_imgAttr));
+    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)(imgAttr));
     NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
                                             (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
                                             nil];
@@ -169,9 +167,8 @@
 
 /* Callbacks */
 static void deallocCallback( void* ref ){
-//    ref = [[NSDictionary alloc] init];
+    //    ref = [[NSDictionary alloc] init];
     //    [(__bridge id)ref release];
-    ref = nil;
 }
 static CGFloat ascentCallback( void *ref ){
     return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"height"] floatValue];
@@ -316,7 +313,89 @@ static CGFloat widthCallback( void* ref ){
                           font:(UIFont*)font
                          width:(CGFloat)width
                     matchArray:(NSArray*)array{
-    return 300;
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    NSDictionary *matchDict = [self matchDictWithArray:array];
+    
+    NSRegularExpression* regex = [[NSRegularExpression alloc]
+                                  initWithPattern:PATTERN_STR
+                                  options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators
+                                  error:nil];
+    
+    NSArray* chunks = [regex matchesInString:string options:0
+                                       range:NSMakeRange(0, [string length])];
+    
+    
+    for (NSTextCheckingResult *result in chunks) {
+        NSString *resultStr = [string substringWithRange:[result range]];
+        if ([resultStr hasPrefix:@"["] && [resultStr hasSuffix:@"]"]) {
+            NSString *name = [resultStr substringWithRange:NSMakeRange(1, [resultStr length]-2)];
+            if ([[matchDict allKeys] containsObject:name]) {
+                __block NSNumber* width = [NSNumber numberWithFloat:font.lineHeight/[resultStr length]];
+                __block NSNumber* height = [NSNumber numberWithFloat:font.lineHeight];
+                
+                CTRunDelegateCallbacks callbacks;
+                callbacks.version = kCTRunDelegateVersion1;
+                callbacks.getAscent = ascentCallback;
+                callbacks.getDescent = descentCallback;
+                callbacks.getWidth = widthCallback;
+                callbacks.dealloc = deallocCallback;
+                
+                NSDictionary* imgAttr = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                         width, @"width",
+                                         height, @"height", nil];
+                
+                CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge_retained void *)(imgAttr));
+                NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                        (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
+                                                        nil];
+                CFRelease(delegate);
+                
+                [str addAttributes:attrDictionaryDelegate
+                             range:[result range]];
+                
+            }
+        }
+    }
+    
+    CTTextAlignment alignment = (uint8_t)0;
+    CTLineBreakMode lineBreakMode = (uint8_t)1;
+	CTParagraphStyleSetting paraStyles[2] =
+    {
+		{
+            .spec = kCTParagraphStyleSpecifierAlignment,
+            .valueSize = sizeof(CTTextAlignment),
+            .value = (const void*)&alignment
+        },
+        {
+            .spec = kCTParagraphStyleSpecifierLineBreakMode,
+            .valueSize = sizeof(CTLineBreakMode),
+            .value = (const void*)&lineBreakMode
+        }
+	};
+	CTParagraphStyleRef aStyle = CTParagraphStyleCreate(paraStyles, 2);
+    
+    NSRange fullRange = NSMakeRange(0, [str length]);
+    
+    [str removeAttribute:(NSString*)kCTParagraphStyleAttributeName
+                   range:fullRange];
+	[str addAttribute:(NSString*)kCTParagraphStyleAttributeName
+                value:(__bridge id)aStyle
+                range:fullRange];
+    
+    [str removeAttribute:(NSString*)kCTFontAttributeName range:fullRange];
+    CTFontRef aFont = CTFontCreateWithName((CFStringRef)font.fontName, font.pointSize, NULL);
+	[str addAttribute:(NSString*)kCTFontAttributeName value:(__bridge id)aFont range:fullRange];
+    CFRelease(aFont);
+    CFRelease(aStyle);
+    
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)str);
+    CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
+                                                                        CFRangeMake(0, str.length),
+                                                                        NULL,
+                                                                        CGSizeMake(width, MAXFLOAT),
+                                                                        NULL);
+    return suggestedSize.height;
 }
 
 - (void)dealloc{

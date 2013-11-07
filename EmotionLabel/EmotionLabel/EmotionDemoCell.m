@@ -52,7 +52,7 @@
     return [EmotionLabel fitHeightWithString:string
                                         font:font
                                        width:width
-                                  matchArray:array];
+                                  matchArray:array] + 20;
 }
 
 @end

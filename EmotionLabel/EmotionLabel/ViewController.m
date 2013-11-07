@@ -30,7 +30,7 @@
                   We can't wait to see what y[asdf[asd]f]ou'll build with it.\
                   Octokit.net is used [a]in GitHub for Windows and provides an async-based API using HttpClient. Octokit.net req[b]uires .NET 4.5 or later.",
                   @"[a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a]",
-                  @"[a][a][a][a][a][a][a][a][asdfddd][a][a][a][a][a][a][a][a][a][a][a][a][a]",
+                  @"[a][a][a][a][a][a][a][a][asdfddd][a][a][a][a][a][a][a][a][a][a][a][a][a][a][a]",
                   @"",
                   @"no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.\
                   no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.no emotion.\
@@ -58,7 +58,7 @@
                                                     ofType:@"plist"]];
     return [EmotionDemoCell cellHeightWithString:[textArray objectAtIndex:indexPath.row % [textArray count]]
                                             font:[UIFont systemFontOfSize:20.f]
-                                           width:200
+                                           width:300
                                       matchArray:arr];
 }
 
